@@ -60,7 +60,7 @@ var urlReplacer = (function(document){
 
 		goReplacerGo: function() {
 			for (var i = t.elements.length - 1; i >= 0; i--) {
-				t.elements[i].innerHTML = t.replaceUrls(t.elements[i].innerText);
+				t.elements[i].innerHTML = t.replaceUrls(t.elements[i].innerHTML);
 			};
 		},
 
