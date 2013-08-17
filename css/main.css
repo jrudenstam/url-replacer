@@ -93,7 +93,14 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+body {
+    color: #333;
+}
 
+.page-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
 
 
 
