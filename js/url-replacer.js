@@ -44,7 +44,7 @@ var urlReplacer = (function(document){
 
 	return {
 		settings: {
-			containerClass: 'replace-urls' 
+			containerClass: 'replace-urls'
 		},
 
 		init: function() {
