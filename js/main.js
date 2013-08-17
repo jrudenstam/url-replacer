@@ -1,1 +1,1 @@
-
+urlReplacer.init();

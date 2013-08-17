@@ -1,5 +1,5 @@
-var urlReplacer = (function(){
-	var t, s;
+var urlReplacer = (function(document){
+	var t, s, h;
 
 	var Helper = function() {};
 
@@ -50,22 +50,23 @@ var urlReplacer = (function(){
 		init: function() {
 			t = this;
 			s = t.settings;
+			h = new Helper;
 
-			t.elements = Helper.getByClass(s.containerClass, document, false);
-			goReplacerGo();
+			t.elements = h.getByClass(s.containerClass, document, false);
+			t.goReplacerGo();
 		},
 
 		elements: [],
 
-		t.goReplacerGo: function() {
+		goReplacerGo: function() {
 			for (var i = t.elements.length - 1; i >= 0; i--) {
-				t.elements[i].innerText = t.replaceUrls(t.elements[i].innerText);
+				t.elements[i].innerHTML = t.replaceUrls(t.elements[i].innerText);
 			};
 		},
 
 		stripwww: function( url ) {
 			// RegX from: http://stackoverflow.com/questions/3281628/regular-expression-to-check-for-a-urls-protocol
-			return url.replace(^(?:(ht|f)tp(s?)\:\/\/)?, '').replace('www.', '');
+			return url.replace(/^(?:(ht|f)tp(s?)\:\/\/)?/, '').replace('www.', '');
 		},
 
 		insertAnchor: function( match, p1, p2, p3, offset, string ) {
@@ -73,9 +74,8 @@ var urlReplacer = (function(){
 		},
 
 		replaceUrls: function ( text ){
-			// RegX from: http://net.tutsplus.com/tutorials/other/8-regular-expressions-you-should-know/
-			var newText = text.replace(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/, t.insertAnchor;
-			return newText;
+			// RegX from: http://stackoverflow.com/questions/37684/how-to-replace-plain-urls-with-links
+			return text.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, t.insertAnchor);
 		}
 	};
-}();
+})(document);
